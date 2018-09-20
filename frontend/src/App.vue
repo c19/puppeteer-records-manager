@@ -12,6 +12,7 @@ export default {
 @import "./styles/_animations.scss";
 @import "./styles/_variables.scss";
 @import "./styles/_typography.scss";
+@import "./styles/_buttons.scss";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

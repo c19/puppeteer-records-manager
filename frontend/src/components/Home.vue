@@ -28,7 +28,10 @@
           </ul>
         </div>
       </div>
-      <Detail :events="currentRecord" v-show="currentRecord"/>
+      <div v-show="currentRecord">
+        <button class="btn btn-sm btn-primary" @click="showRecord=-1">Go Back</button>
+        <Detail :events="currentRecord"/>
+      </div>
     </div>
   </div>
 </template>
