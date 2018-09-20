@@ -40,7 +40,13 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    cssSourceMap: true
+    cssSourceMap: true,
+
+    resolve: {
+      alias: {
+        styles: path.resolve(__dirname, './src/styles/')
+      }
+    },
   },
 
   build: {
