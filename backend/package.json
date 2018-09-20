@@ -1,0 +1,23 @@
+{
+  "name": "challenge2",
+  "version": "1.0.0",
+  "description": "code challenge 2",
+  "main": "index.js",
+  "author": "C19 <classone2010@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "@graphile-contrib/pg-simplify-inflector": "^2.0.1",
+    "apollo-server": "^2.1.0",
+    "apollo-server-express": "^2.1.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "graphql": "^14.0.2",
+    "graphql-tools": "^3.1.1",
+    "pg": "^7.4.3",
+    "postgraphile": "^4.0.0-rc.5",
+    "puppeteer": "^1.8.0"
+  }
+}

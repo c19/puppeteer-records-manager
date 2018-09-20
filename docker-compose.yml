@@ -1,0 +1,14 @@
+version: "2"
+services:
+  frontend:
+    build: frontend/
+    ports:
+      - "80:80"
+  backend:
+    build: backend/
+    ports:
+      - "4000:4000"
+  postgres:
+    image: "postgres:9.6"
+    ports:
+      - "5432:5432"
