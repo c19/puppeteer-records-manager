@@ -2,11 +2,11 @@
   "name": "challenge2",
   "version": "1.0.0",
   "description": "code challenge 2",
-  "main": "index.js",
+  "main": "server.js",
   "author": "C19 <classone2010@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "node server.js"
   },
   "dependencies": {
     "@graphile-contrib/pg-simplify-inflector": "^2.0.1",
