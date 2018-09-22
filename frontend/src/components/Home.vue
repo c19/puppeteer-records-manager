@@ -24,7 +24,8 @@
                   <div class="record-props text-muted">{{record.url}}</div>
                 </div>
               </div>
-              <button class="btn btn-sm btn-danger" @click="remove(record.nodeId)">Delete</button>
+              <button class="btn btn-sm btn-danger margin-r" @click="remove(record.nodeId)">Delete</button>
+              <button class="btn btn-sm btn-primary" @click="replay(record.id)">Replay</button>
             </li>
           </ul>
         </div>
@@ -129,6 +130,9 @@ export default {
         // Error
         console.error(error)
       })
+    },
+    replay (id) {
+      
     }
   }
 }
@@ -139,6 +143,9 @@ export default {
   @import "../styles/_variables.scss";
   @import "../styles/_typography.scss";
 
+  .margin-r {
+    margin-right: 20px;
+  }
   .clickable {
     cursor:pointer;
   }
