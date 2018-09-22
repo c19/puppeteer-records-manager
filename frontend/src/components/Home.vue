@@ -100,35 +100,35 @@ export default {
     },
     remove (nodeId) {
       this.$apollo.mutate({
-          // Query
-          mutation: DELETE_QUERY,
-          // Parameters
-          variables: {
-            nodeId: nodeId
-          },
-          update: (store) => {
-            console.log(store)
-            let data = store.readQuery({
-              query: ALL_RECORDS
-            });
-            data.allRecords.edges = data.allRecords.edges.filter(a => a.node.nodeId != nodeId)
-            store.writeQuery({ query: ALL_RECORDS, data });
-            console.log(data)
-          },
-          // Optimistic UI
-          // Will be treated as a 'fake' result as soon as the request is made
-          // so that the UI can react quickly and the user be happy
-          optimisticResponse: {
-            __typename: 'Mutation',
-            deleteRecord: null,
-          },
-        }).then((data) => {
-          // Result
+        // Query
+        mutation: DELETE_QUERY,
+        // Parameters
+        variables: {
+          nodeId: nodeId
+        },
+        update: (store) => {
+          console.log(store)
+          let data = store.readQuery({
+            query: ALL_RECORDS
+          })
+          data.allRecords.edges = data.allRecords.edges.filter(a => a.node.nodeId !== nodeId)
+          store.writeQuery({ query: ALL_RECORDS, data })
           console.log(data)
-        }).catch((error) => {
-          // Error
-          console.error(error)
-        })
+        },
+        // Optimistic UI
+        // Will be treated as a 'fake' result as soon as the request is made
+        // so that the UI can react quickly and the user be happy
+        optimisticResponse: {
+          __typename: 'Mutation',
+          deleteRecord: null
+        }
+      }).then((data) => {
+        // Result
+        console.log(data)
+      }).catch((error) => {
+        // Error
+        console.error(error)
+      })
     }
   }
 }

@@ -1,0 +1,1 @@
+./node_modules/postgraphile/build/postgraphile/cli.js -c "postgres://postgres@localhost:5432/manager" --watch
