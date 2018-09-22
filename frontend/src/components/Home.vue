@@ -20,7 +20,7 @@
                   <div class="record-props text-muted"><timeago :datetime="record.timestamp" :auto-update="60"></timeago></div>
                 </div>
                 <div class="record-part">
-                  <div class="record-props text-muted">{{record.recordCount || 0}} records</div>
+                  <div class="record-props text-muted">{{record.eventCount || 0}} records</div>
                   <div class="record-props text-muted">{{record.url}}</div>
                 </div>
               </div>
