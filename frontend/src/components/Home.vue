@@ -5,7 +5,7 @@
         <div class="empty" v-show="$apolloData.loading">
           <img src="../assets/Desert.svg" alt="desert" width="78px">
           <h3>No recorded records yet</h3>
-          <p class="text-muted">Click record to begin</p>
+          <p class="text-muted">use https://github.com/c19/puppeteer-recorder/ chrome plugin to record and upload</p>
         </div>
         <div class="records" v-show="!$apolloData.loading">
           <p class="text-muted text-center loading" v-show="records.length === 0">Waiting for records</p>
@@ -24,6 +24,7 @@
                   <div class="record-props text-muted">{{record.url}}</div>
                 </div>
               </div>
+              <button class="btn btn-sm btn-danger" @click="remove(record.nodeId)">Delete</button>
             </li>
           </ul>
         </div>
@@ -39,18 +40,14 @@
 <script>
 import gql from 'graphql-tag'
 import Detail from './Detail'
+window.gql = gql
 
-export default {
-  name: 'Home',
-  components: {
-    Detail
-  },
-  apollo: {
-    allRecords: gql`
+const ALL_RECORDS = gql`
 query {
   allRecords {
     edges {
       node {
+        nodeId
         id
         name
         url
@@ -61,6 +58,22 @@ query {
     }
   } 
 }`
+
+const DELETE_QUERY = gql`mutation ($nodeId: ID!) {
+            deleteRecord (input: {nodeId: $nodeId}) {
+              record {
+                id
+              }
+            }
+          }`
+
+export default {
+  name: 'Home',
+  components: {
+    Detail
+  },
+  apollo: {
+    allRecords: ALL_RECORDS
   },
   computed: {
     records () {
@@ -84,6 +97,38 @@ query {
   methods: {
     showDetail () {
       this.$router.push(`detail/${this.record.id}`)
+    },
+    remove (nodeId) {
+      this.$apollo.mutate({
+          // Query
+          mutation: DELETE_QUERY,
+          // Parameters
+          variables: {
+            nodeId: nodeId
+          },
+          update: (store) => {
+            console.log(store)
+            let data = store.readQuery({
+              query: ALL_RECORDS
+            });
+            data.allRecords.edges = data.allRecords.edges.filter(a => a.node.nodeId != nodeId)
+            store.writeQuery({ query: ALL_RECORDS, data });
+            console.log(data)
+          },
+          // Optimistic UI
+          // Will be treated as a 'fake' result as soon as the request is made
+          // so that the UI can react quickly and the user be happy
+          optimisticResponse: {
+            __typename: 'Mutation',
+            deleteRecord: null,
+          },
+        }).then((data) => {
+          // Result
+          console.log(data)
+        }).catch((error) => {
+          // Error
+          console.error(error)
+        })
     }
   }
 }
@@ -134,7 +179,7 @@ query {
             }
 
             .record-description {
-              margin-right: auto;
+              margin-right: 20px;
               display: flex;
               flex-direction: row;
 
