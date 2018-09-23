@@ -25,7 +25,7 @@
                 </div>
               </div>
               <button class="btn btn-sm btn-danger margin-r" @click="remove(record.nodeId)">Delete</button>
-              <button class="btn btn-sm btn-primary margin-r" @click="replay(record.id)">Replay</button>
+              <button class="btn btn-sm btn-primary margin-r" :disabled="replaying[record.id]" @click="replay(record.id)">{{replaying[record.id] ? 'Replaying' : 'Replay'}}</button>
               <img class="thumbnail" :src="`screenshots/${record.id}.png`">
             </li>
           </ul>
@@ -90,7 +90,8 @@ export default {
   },
   data () {
     return {
-      showRecord: -1
+      showRecord: -1,
+      replaying: {}
     }
   },
   methods: {
@@ -130,7 +131,12 @@ export default {
       })
     },
     replay (id) {
-
+      const self = this
+      fetch(`/replay/${id}`).then((res) => {
+        if (!res.error) {
+          self.replaying[id] = true
+        }
+      })
     }
   }
 }
