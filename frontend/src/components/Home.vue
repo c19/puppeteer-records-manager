@@ -25,14 +25,15 @@
                 </div>
               </div>
               <button class="btn btn-sm btn-danger margin-r" @click="remove(record.nodeId)">Delete</button>
-              <button class="btn btn-sm btn-primary" @click="replay(record.id)">Replay</button>
+              <button class="btn btn-sm btn-primary margin-r" @click="replay(record.id)">Replay</button>
+              <img class="thumbnail" :src="`screenshots/${record.id}.png`">
             </li>
           </ul>
         </div>
       </div>
-      <div v-show="currentRecord">
+      <div v-if="currentRecord">
         <button class="btn btn-sm btn-primary" @click="showRecord=-1">Go Back</button>
-        <Detail :events="currentRecord"/>
+        <Detail :record="currentRecord"/>
       </div>
     </div>
   </div>
@@ -84,10 +85,7 @@ export default {
       return this.allRecords.edges.map(a => Object.assign({}, a.node, {events: JSON.parse(a.node.events)}))
     },
     currentRecord () {
-      if (!this.records[this.showRecord]) {
-        return undefined
-      }
-      return this.records[this.showRecord].events
+      return this.records[this.showRecord]
     }
   },
   data () {
@@ -132,7 +130,7 @@ export default {
       })
     },
     replay (id) {
-      
+
     }
   }
 }
@@ -143,6 +141,13 @@ export default {
   @import "../styles/_variables.scss";
   @import "../styles/_typography.scss";
 
+  .thumbnail {
+    display: block;
+    max-width:100px;
+    max-height:57px;
+    width: auto;
+    height: auto;
+  }
   .margin-r {
     margin-right: 20px;
   }

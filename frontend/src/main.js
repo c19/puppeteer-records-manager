@@ -9,7 +9,7 @@ Vue.config.productionTip = false
 
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({
-    uri: 'http://127.0.0.1:5000/graphql'
+    uri: 'http://127.0.0.1:4000/graphql'
   })
 })
 

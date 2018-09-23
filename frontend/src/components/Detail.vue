@@ -2,9 +2,9 @@
   <div class="tab recording-tab">
     <div class="content">
       <div class="events">
-        <p class="text-muted text-center loading" v-show="events.length === 0">Waiting for events</p>
+        <p class="text-muted text-center loading" v-show="record.events.length === 0">Waiting for events</p>
         <ul class="event-list">
-          <li v-for="(event, index) in events" :key="index" class="event-list-item">
+          <li v-for="(event, index) in record.events" :key="index" class="event-list-item">
             <div class="event-label">
               {{index + 1}}.
             </div>
@@ -16,13 +16,15 @@
         </ul>
       </div>
     </div>
+    <h2>ScreenShot:</h2>
+    <img class="screenshot" :src="`screenshots/${record.id}.png`">
   </div>
 </template>
 <script>
 export default {
   name: 'Detail',
   props: {
-    events: { type: Array, default: () => { return [] } }
+    record: { type: Object }
   },
   methods: {
     parseEventValue (event) {
