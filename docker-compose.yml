@@ -6,6 +6,8 @@ services:
       - "80:80"
   backend:
     build: backend/
+    depends_on:
+      - postgres
     ports:
       - "4000:4000"
   postgres:
