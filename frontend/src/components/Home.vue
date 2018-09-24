@@ -134,7 +134,7 @@ export default {
       const self = this
       fetch(`/replay/${id}`).then((res) => {
         if (!res.error) {
-          self.replaying[id] = true
+          self.$set(self.replaying, id, true)
         }
       })
     }
